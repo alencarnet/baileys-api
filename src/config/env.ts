@@ -22,7 +22,7 @@ interface CustomProcessEnv {
 
 const envSchema = z
 	.object({
-		PORT: z.number(),
+		PORT: z.coerce.number().default(3000),
 		NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
 		URL_WEBHOOK: z.string().optional(),
 		ENABLE_WEBHOOK: z.boolean(),
@@ -47,7 +47,7 @@ const envSchema = z
 	});
 
 const processEnv: Partial<CustomProcessEnv> = {
-	PORT: Number(process.env.PORT),
+	PORT: process.env.PORT ? parseInt(process.env.PORT, 10) : undefined,
 	NODE_ENV: process.env.NODE_ENV as "development" | "production" | "test",
 	URL_WEBHOOK: process.env.URL_WEBHOOK,
 	ENABLE_WEBHOOK: process.env.ENABLE_WEBHOOK === "true",
