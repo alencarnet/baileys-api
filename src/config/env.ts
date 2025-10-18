@@ -47,7 +47,7 @@ const envSchema = z
 	});
 
 const processEnv: Partial<CustomProcessEnv> = {
-	PORT: process.env.PORT ? Number(process.env.PORT) : 3000,
+	PORT: Number(process.env.PORT),
 	NODE_ENV: process.env.NODE_ENV as "development" | "production" | "test",
 	URL_WEBHOOK: process.env.URL_WEBHOOK,
 	ENABLE_WEBHOOK: process.env.ENABLE_WEBHOOK === "true",
